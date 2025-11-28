@@ -1,58 +1,53 @@
-{{/* 
-  Minimal3DP Badge Shortcode
+{{/*
+  M3DP Badge Shortcode
   
   Usage:
-    {{< m3dp-badge type="calculator" href="/tools/calculator/" >}}Cost Calculator{{< /m3dp-badge >}}
-    {{< m3dp-badge type="app" size="lg" >}}Download App{{< /m3dp-badge >}}
-    {{< m3dp-badge type="youtube" >}}Subscribe{{< /m3dp-badge >}}
+    {{< m3dp-badge type="calculator" href="/tools/calculator/" >}}Calculator{{< /m3dp-badge >}}
+    {{< m3dp-badge type="youtube" href="https://youtube.com/..." size="lg" >}}Watch Video{{< /m3dp-badge >}}
   
   Parameters:
-    - type (optional): calculator, app, youtube, email, support (default: neutral gray)
+    - type (required): calculator, app, youtube, email, support
     - href (optional): Link URL (if omitted, renders as span)
-    - size (optional): sm, lg (default: base)
-    - icon (optional): Icon HTML or emoji to display before text
-    - location (optional): For analytics tracking (e.g., "sidebar", "homepage")
-    - target (optional): Link target attribute (default: "_self", use "_blank" for external)
-    - rel (optional): Link rel attribute (default: none, suggest "noopener noreferrer" for _blank)
-  
-  Inner content: Badge label text
+    - size (optional): sm, lg (defaults to base)
+    - icon (optional): HTML/SVG icon to display before text
+    - location (optional): GA4 location context (defaults to page path)
+    - target (optional): Link target attribute
+    - rel (optional): Link rel attribute
 */}}
 
-{{ $type := .Get "type" | default "" }}
-{{ $href := .Get "href" }}
-{{ $size := .Get "size" | default "" }}
-{{ $icon := .Get "icon" }}
-{{ $location := .Get "location" | default "unspecified" }}
-{{ $target := .Get "target" | default "_self" }}
-{{ $rel := .Get "rel" | default "" }}
-{{ $label := .Inner | markdownify | plainify }}
+{{- $type := .Get "type" | default "calculator" -}}
+{{- $href := .Get "href" -}}
+{{- $size := .Get "size" -}}
+{{- $icon := .Get "icon" -}}
+{{- $location := .Get "location" | default .Page.RelPermalink -}}
+{{- $target := .Get "target" -}}
+{{- $rel := .Get "rel" -}}
+{{- $label := .Inner | plainify | htmlUnescape -}}
 
-{{/* Build class string */}}
-{{ $classes := "m3dp-badge" }}
-{{ if $type }}
-  {{ $classes = printf "%s m3dp-badge--%s" $classes $type }}
-{{ end }}
-{{ if $size }}
-  {{ $classes = printf "%s m3dp-badge--%s" $classes $size }}
-{{ end }}
+{{- $classes := slice "m3dp-badge" -}}
+{{- $classes = $classes | append (printf "m3dp-badge--%s" $type) -}}
+{{- if $size -}}
+  {{- $classes = $classes | append (printf "m3dp-badge--%s" $size) -}}
+{{- end -}}
 
-{{/* Render as link or span */}}
-{{ if $href }}
-  <a href="{{ $href }}" 
-     class="{{ $classes }}"
-     {{ if ne $target "_self" }}target="{{ $target }}"{{ end }}
-     {{ if $rel }}rel="{{ $rel }}"{{ end }}
-     onclick="trackCtaClick('badge', '{{ $type }}', '{{ $location }}')">
-    {{ if $icon }}
+{{- if $href -}}
+  <a href="{{ $href | safeURL }}" 
+     class="{{ delimit $classes " " }}"
+     data-location="{{ $location }}"
+     {{- if $target }} target="{{ $target }}"{{ end }}
+     {{- if $rel }} rel="{{ $rel }}"{{ end }}
+     onclick="if (typeof trackCtaClick === 'function') { trackCtaClick('{{ $type }}', '{{ $label }}', '{{ $location }}'); }">
+    {{- if $icon -}}
       <span class="m3dp-badge__icon">{{ $icon | safeHTML }}</span>
-    {{ end }}
+    {{- end -}}
     <span class="m3dp-badge__label">{{ $label }}</span>
   </a>
-{{ else }}
-  <span class="{{ $classes }}">
-    {{ if $icon }}
+{{- else -}}
+  <span class="{{ delimit $classes " " }}"
+        data-location="{{ $location }}">
+    {{- if $icon -}}
       <span class="m3dp-badge__icon">{{ $icon | safeHTML }}</span>
-    {{ end }}
+    {{- end -}}
     <span class="m3dp-badge__label">{{ $label }}</span>
   </span>
-{{ end }}
+{{- end -}}
