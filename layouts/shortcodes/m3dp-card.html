@@ -1,0 +1,11 @@
+{{/* Minimal3DP Card Component */}}
+<div class="m3dp-card{{ with .Get " variant" }} m3dp-card--{{ . }}{{ end }}">
+    {{ if .Get "title" }}
+    <h3 class="m3dp-card__title">{{ .Get "title" }}</h3>
+    {{ end }}
+    {{ if .Inner }}
+    <div class="m3dp-card__body">
+        {{ .Inner | markdownify }}
+    </div>
+    {{ end }}
+</div>
