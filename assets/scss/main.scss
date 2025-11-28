@@ -1,0 +1,187 @@
+// =============================================================================
+// Minimal3DP Design System - Main SCSS Entry Point
+// =============================================================================
+// This file imports design tokens and component styles.
+// Add this to: m3dp-design-system/assets/scss/main.scss
+
+// Import design tokens first
+@import "tokens";
+
+// =============================================================================
+// Base Card Component
+// =============================================================================
+
+.m3dp-card {
+  background: white;
+  border: 1px solid $m3dp-gray-200;
+  border-radius: $m3dp-radius-md;
+  box-shadow: $m3dp-shadow-sm;
+  padding: $m3dp-space-6;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  
+  &:hover {
+    box-shadow: $m3dp-shadow-md;
+  }
+  
+  .m3dp-card__title {
+    font-size: $m3dp-font-size-xl;
+    font-weight: $m3dp-font-weight-bold;
+    color: $m3dp-gray-900;
+    margin: 0 0 $m3dp-space-4 0;
+    line-height: $m3dp-line-height-tight;
+  }
+  
+  .m3dp-card__body {
+    font-size: $m3dp-font-size-base;
+    color: $m3dp-gray-700;
+    line-height: $m3dp-line-height-normal;
+    
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// =============================================================================
+// Affiliate Product Card Variant
+// =============================================================================
+
+.m3dp-card--affiliate {
+  border: 2px solid $m3dp-blue-500;
+  display: flex;
+  gap: $m3dp-space-6;
+  flex-wrap: wrap;
+  
+  .m3dp-card__image {
+    flex: 0 0 150px;
+    
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: $m3dp-radius-sm;
+      display: block;
+      object-fit: contain;
+    }
+  }
+  
+  .m3dp-card__content {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .m3dp-card__price {
+    font-size: $m3dp-font-size-2xl;
+    font-weight: $m3dp-font-weight-bold;
+    color: $m3dp-blue-600;
+    margin: $m3dp-space-2 0;
+  }
+  
+  // Mobile responsive
+  @media (max-width: $m3dp-breakpoint-sm) {
+    flex-direction: column;
+    
+    .m3dp-card__image {
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+    
+    .m3dp-card__content {
+      min-width: 0;
+    }
+  }
+}
+
+// =============================================================================
+// Amazon Button
+// =============================================================================
+
+.m3dp-btn--amazon {
+  display: inline-block;
+  background: $m3dp-orange-500;
+  color: #000;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: $m3dp-radius-sm;
+  font-weight: $m3dp-font-weight-bold;
+  font-size: $m3dp-font-size-base;
+  margin-top: $m3dp-space-2;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  border: none;
+  cursor: pointer;
+  
+  &:hover {
+    background: darken($m3dp-orange-500, 8%);
+    text-decoration: none;
+    color: #000;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// =============================================================================
+// Affiliate Disclosure
+// =============================================================================
+
+.m3dp-affiliate-disclosure {
+  font-size: $m3dp-font-size-xs;
+  color: $m3dp-gray-600;
+  margin-top: $m3dp-space-2;
+  font-style: italic;
+  line-height: $m3dp-line-height-normal;
+}
+
+// =============================================================================
+// Base Button Styles (for future use)
+// =============================================================================
+
+.m3dp-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: $m3dp-font-size-base;
+  font-weight: $m3dp-font-weight-medium;
+  text-align: center;
+  text-decoration: none;
+  border-radius: $m3dp-radius-sm;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &--primary {
+    background: $m3dp-color-primary;
+    color: white;
+    
+    &:hover {
+      background: darken($m3dp-color-primary, 8%);
+      color: white;
+      text-decoration: none;
+    }
+  }
+  
+  &--secondary {
+    background: $m3dp-gray-200;
+    color: $m3dp-gray-900;
+    
+    &:hover {
+      background: $m3dp-gray-300;
+      color: $m3dp-gray-900;
+      text-decoration: none;
+    }
+  }
+  
+  &--outline {
+    background: transparent;
+    border: 2px solid $m3dp-color-primary;
+    color: $m3dp-color-primary;
+    
+    &:hover {
+      background: $m3dp-color-primary;
+      color: white;
+      text-decoration: none;
+    }
+  }
+}

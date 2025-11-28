@@ -1,11 +1,26 @@
-{{/* Minimal3DP Card Component */}}
-<div class="m3dp-card{{ with .Get " variant" }} m3dp-card--{{ . }}{{ end }}">
-    {{ if .Get "title" }}
-    <h3 class="m3dp-card__title">{{ .Get "title" }}</h3>
-    {{ end }}
-    {{ if .Inner }}
-    <div class="m3dp-card__body">
-        {{ .Inner | markdownify }}
-    </div>
-    {{ end }}
+{{/* 
+  Minimal3DP Design System - Card Shortcode
+  Add this to: m3dp-design-system/layouts/shortcodes/m3dp-card.html
+  
+  Usage:
+  {{< m3dp-card title="Card Title" >}}
+  Card content goes here.
+  {{< /m3dp-card >}}
+  
+  Parameters:
+  - title: Card heading (optional)
+  - class: Additional CSS classes (optional)
+*/}}
+
+{{ $title := .Get "title" }}
+{{ $class := .Get "class" | default "" }}
+
+<div class="m3dp-card {{ $class }}">
+  {{ if $title }}
+  <h3 class="m3dp-card__title">{{ $title }}</h3>
+  {{ end }}
+  
+  <div class="m3dp-card__body">
+    {{ .Inner | markdownify }}
+  </div>
 </div>
