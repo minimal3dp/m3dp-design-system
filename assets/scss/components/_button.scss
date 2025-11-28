@@ -1,0 +1,210 @@
+/* ==========================================================================
+   BUTTON COMPONENT
+   Base button styles and variants for Minimal3DP
+   ========================================================================== */
+
+/* Base button - extends existing styles, doesn't replace them */
+.m3dp-btn {
+  display: inline-block;
+  padding: $m3dp-space-3 $m3dp-space-6;
+  border-radius: $m3dp-radius-sm;
+  font-weight: 700;
+  font-size: $m3dp-font-size-base;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.5;
+  
+  &:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: $m3dp-shadow-md;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:focus {
+    outline: 2px solid $m3dp-blue-500;
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+/* Primary button */
+.m3dp-btn--primary {
+  background: $m3dp-blue-600;
+  color: #fff;
+  
+  &:hover {
+    background: $m3dp-blue-700;
+    color: #fff;
+  }
+}
+
+/* Secondary button */
+.m3dp-btn--secondary {
+  background: $m3dp-gray-600;
+  color: #fff;
+  
+  &:hover {
+    background: $m3dp-gray-700;
+    color: #fff;
+  }
+}
+
+/* Amazon button (for affiliate links) */
+.m3dp-btn--amazon {
+  display: inline-block;
+  background: $m3dp-orange-500;
+  color: #000;
+  padding: $m3dp-space-3 $m3dp-space-6;
+  text-decoration: none;
+  border-radius: $m3dp-radius-sm;
+  font-weight: 700;
+  margin-top: $m3dp-space-2;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: darken($m3dp-orange-500, 5%);
+    text-decoration: none;
+    color: #000;
+    transform: translateY(-1px);
+    box-shadow: $m3dp-shadow-md;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* YouTube button */
+.m3dp-btn--youtube {
+  background: #FF0000;
+  color: #fff;
+  
+  &:hover {
+    background: #CC0000;
+    color: #fff;
+  }
+}
+
+/* Success button */
+.m3dp-btn--success {
+  background: $m3dp-green-600;
+  color: #fff;
+  
+  &:hover {
+    background: $m3dp-green-700;
+    color: #fff;
+  }
+}
+
+/* Outline button variant */
+.m3dp-btn--outline {
+  background: transparent;
+  color: $m3dp-blue-600;
+  border: 2px solid $m3dp-blue-600;
+  
+  &:hover {
+    background: $m3dp-blue-600;
+    color: #fff;
+    border-color: $m3dp-blue-600;
+  }
+}
+
+/* Ghost button variant */
+.m3dp-btn--ghost {
+  background: transparent;
+  color: $m3dp-gray-700;
+  
+  &:hover {
+    background: $m3dp-gray-100;
+    color: $m3dp-gray-900;
+  }
+}
+
+/* Size variants */
+.m3dp-btn--sm {
+  padding: $m3dp-space-2 $m3dp-space-4;
+  font-size: $m3dp-font-size-sm;
+}
+
+.m3dp-btn--lg {
+  padding: $m3dp-space-4 $m3dp-space-8;
+  font-size: $m3dp-font-size-lg;
+}
+
+.m3dp-btn--xl {
+  padding: $m3dp-space-5 $m3dp-space-10;
+  font-size: $m3dp-font-size-xl;
+}
+
+/* Full width button */
+.m3dp-btn--block {
+  display: block;
+  width: 100%;
+}
+
+/* Button with icon */
+.m3dp-btn--icon {
+  display: inline-flex;
+  align-items: center;
+  gap: $m3dp-space-2;
+  
+  .m3dp-btn__icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Button group */
+.m3dp-btn-group {
+  display: flex;
+  gap: $m3dp-space-2;
+  flex-wrap: wrap;
+  
+  .m3dp-btn {
+    margin: 0;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: $m3dp-breakpoint-sm) {
+  .m3dp-btn {
+    padding: $m3dp-space-3 $m3dp-space-5;
+    font-size: $m3dp-font-size-sm;
+  }
+  
+  .m3dp-btn--lg {
+    padding: $m3dp-space-3 $m3dp-space-6;
+    font-size: $m3dp-font-size-base;
+  }
+  
+  .m3dp-btn--xl {
+    padding: $m3dp-space-4 $m3dp-space-7;
+    font-size: $m3dp-font-size-lg;
+  }
+  
+  /* Make CTAs full width on mobile by default */
+  .cta .m3dp-btn,
+  .m3dp-cta .m3dp-cta__btn {
+    width: 100%;
+    display: block;
+  }
+}

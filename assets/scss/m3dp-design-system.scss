@@ -7,6 +7,12 @@
 // Import design tokens first
 @import "tokens";
 
+// Import components
+@import "components/card";
+@import "components/cta";
+@import "components/badge"; // NEW
+@import "components/button"; // NEW
+
 // =============================================================================
 // Base Card Component
 // =============================================================================

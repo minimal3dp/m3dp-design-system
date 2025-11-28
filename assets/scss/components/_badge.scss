@@ -1,0 +1,134 @@
+/* ==========================================================================
+   BADGE COMPONENT
+   Inline CTA badges for compact call-to-action elements
+   ========================================================================== */
+
+/* Base badge styles */
+.m3dp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $m3dp-space-2;
+  padding: $m3dp-space-2 $m3dp-space-3;
+  border-radius: $m3dp-radius-full;
+  font-weight: 600;
+  font-size: $m3dp-font-size-sm;
+  text-decoration: none;
+  color: $m3dp-gray-900;
+  background: $m3dp-gray-200;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: transform 0.05s ease, box-shadow 0.1s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  white-space: nowrap;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    color: $m3dp-gray-900;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* Badge label */
+.m3dp-badge__label {
+  white-space: nowrap;
+}
+
+/* Badge icon (optional) */
+.m3dp-badge__icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Badge variants */
+.m3dp-badge--calculator {
+  background: linear-gradient(135deg, $m3dp-blue-100 0%, $m3dp-blue-200 100%);
+  color: $m3dp-gray-900;
+  
+  &:hover {
+    color: $m3dp-gray-900;
+  }
+}
+
+.m3dp-badge--app {
+  background: linear-gradient(135deg, $m3dp-cyan-100 0%, $m3dp-cyan-200 100%);
+  color: $m3dp-gray-900;
+  
+  &:hover {
+    color: $m3dp-gray-900;
+  }
+}
+
+.m3dp-badge--youtube {
+  background: linear-gradient(135deg, #FFE5E5 0%, #FFCCCC 100%);
+  color: $m3dp-gray-900;
+  
+  &:hover {
+    color: $m3dp-gray-900;
+  }
+}
+
+.m3dp-badge--email {
+  background: linear-gradient(135deg, $m3dp-green-100 0%, $m3dp-green-200 100%);
+  color: $m3dp-gray-900;
+  
+  &:hover {
+    color: $m3dp-gray-900;
+  }
+}
+
+.m3dp-badge--support {
+  background: linear-gradient(135deg, $m3dp-purple-100 0%, $m3dp-purple-200 100%);
+  color: $m3dp-gray-900;
+  
+  &:hover {
+    color: $m3dp-gray-900;
+  }
+}
+
+/* Size variants */
+.m3dp-badge--sm {
+  padding: $m3dp-space-1 $m3dp-space-2;
+  font-size: $m3dp-font-size-xs;
+  gap: $m3dp-space-1;
+  
+  .m3dp-badge__icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.m3dp-badge--lg {
+  padding: $m3dp-space-3 $m3dp-space-4;
+  font-size: $m3dp-font-size-base;
+  gap: $m3dp-space-3;
+  
+  .m3dp-badge__icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Badge group spacing */
+.m3dp-badge + .m3dp-badge {
+  margin-left: $m3dp-space-2;
+}
+
+/* Mobile responsive */
+@media (max-width: $m3dp-breakpoint-sm) {
+  .m3dp-badge {
+    display: inline-flex;
+    margin-bottom: $m3dp-space-2;
+  }
+  
+  .m3dp-badge + .m3dp-badge {
+    margin-left: $m3dp-space-2;
+  }
+}
