@@ -1,0 +1,211 @@
+// =============================================================================
+// Minimal3DP Design System - CTA Component
+// =============================================================================
+// Add this to: m3dp-design-system/assets/scss/components/_cta.scss
+
+// =============================================================================
+// Base CTA Block Component
+// =============================================================================
+
+.m3dp-cta {
+  color: #fff;
+  padding: $m3dp-space-16; // 56px
+  border-radius: $m3dp-radius-lg;
+  text-align: center;
+  margin: $m3dp-space-16 0; // 80px 0
+  box-sizing: border-box;
+  
+  // Spacing between consecutive CTAs
+  & + & {
+    margin-top: calc($m3dp-space-16 * 1.5); // 120px
+  }
+  
+  // Title
+  .m3dp-cta__title {
+    margin-top: 0;
+    color: #fff;
+    font-size: $m3dp-font-size-3xl;
+    font-weight: $m3dp-font-weight-bold;
+    line-height: $m3dp-line-height-tight;
+  }
+  
+  // Body text
+  .m3dp-cta__text {
+    margin: 0 0 $m3dp-space-3 0;
+    font-size: $m3dp-font-size-lg;
+    line-height: $m3dp-line-height-normal;
+  }
+  
+  // Primary button
+  .m3dp-cta__btn {
+    display: inline-block;
+    background: #fff;
+    color: $m3dp-gray-900;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: $m3dp-radius-sm;
+    font-weight: $m3dp-font-weight-bold;
+    font-size: $m3dp-font-size-base;
+    margin-top: $m3dp-space-3;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: $m3dp-shadow-md;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $m3dp-shadow-lg;
+      text-decoration: none;
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  // Form container
+  .m3dp-cta__form {
+    max-width: 400px;
+    margin: $m3dp-space-5 auto 0;
+  }
+  
+  // Form input
+  .m3dp-cta__input {
+    width: 100%;
+    padding: $m3dp-space-3;
+    border: none;
+    border-radius: $m3dp-radius-sm $m3dp-radius-sm 0 0;
+    font-size: $m3dp-font-size-base;
+    box-sizing: border-box;
+    
+    &:focus {
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+      outline-offset: -2px;
+    }
+  }
+  
+  // Form submit button
+  .m3dp-cta__submit {
+    width: 100%;
+    padding: $m3dp-space-3;
+    background: #fff;
+    color: $m3dp-gray-900;
+    border: none;
+    border-radius: 0 0 $m3dp-radius-sm $m3dp-radius-sm;
+    font-weight: $m3dp-font-weight-bold;
+    font-size: $m3dp-font-size-base;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background: $m3dp-gray-100;
+    }
+    
+    &:active {
+      background: $m3dp-gray-200;
+    }
+  }
+  
+  // Small note text
+  .m3dp-cta__note {
+    font-size: $m3dp-font-size-sm;
+    margin-top: $m3dp-space-3;
+    opacity: 0.9;
+    line-height: $m3dp-line-height-normal;
+  }
+}
+
+// =============================================================================
+// CTA Variants
+// =============================================================================
+
+// YouTube CTA - Red gradient
+.m3dp-cta--youtube {
+  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+  
+  .m3dp-cta__btn {
+    color: #FF0000;
+    
+    &:hover {
+      color: #CC0000;
+    }
+  }
+}
+
+// Calculator CTA - Blue gradient
+.m3dp-cta--calculator {
+  background: linear-gradient(135deg, $m3dp-blue-500 0%, $m3dp-blue-600 100%);
+  
+  .m3dp-cta__btn {
+    color: $m3dp-blue-700;
+    
+    &:hover {
+      color: $m3dp-blue-800;
+    }
+  }
+}
+
+// Email/Newsletter CTA - Green gradient
+.m3dp-cta--email {
+  background: linear-gradient(135deg, $m3dp-green-500 0%, #059669 100%);
+  
+  .m3dp-cta__submit {
+    color: $m3dp-green-500;
+    
+    &:hover {
+      color: #059669;
+    }
+  }
+}
+
+// Support CTA - Purple gradient
+.m3dp-cta--support {
+  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  
+  .m3dp-cta__btn {
+    color: #8B5CF6;
+    
+    &:hover {
+      color: #7C3AED;
+    }
+  }
+}
+
+// Generic App CTA - Cyan gradient
+.m3dp-cta--app {
+  background: linear-gradient(135deg, #06B6D4 0%, #0EA5E9 100%);
+  
+  .m3dp-cta__btn {
+    color: #0EA5E9;
+    
+    &:hover {
+      color: #0284C7;
+    }
+  }
+}
+
+// =============================================================================
+// Responsive Design
+// =============================================================================
+
+@media (max-width: $m3dp-breakpoint-sm) {
+  .m3dp-cta {
+    padding: $m3dp-space-8; // 32px
+    margin: $m3dp-space-16 0; // 64px 0
+    
+    & + & {
+      margin-top: calc($m3dp-space-16 * 1.3); // 84px
+    }
+    
+    .m3dp-cta__title {
+      font-size: $m3dp-font-size-2xl;
+    }
+    
+    .m3dp-cta__text {
+      font-size: $m3dp-font-size-base;
+    }
+    
+    .m3dp-cta__btn {
+      width: 100%;
+      padding: $m3dp-space-3 $m3dp-space-4;
+    }
+  }
+}

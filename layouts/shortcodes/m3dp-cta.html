@@ -1,0 +1,115 @@
+{{/* 
+  Minimal3DP Design System - CTA Shortcode
+  Add this to: m3dp-design-system/layouts/shortcodes/m3dp-cta.html
+  
+  Usage Examples:
+  {{< m3dp-cta type="youtube" location="blog-post" >}}Custom text{{< /m3dp-cta >}}
+  {{< m3dp-cta type="calculator" href="/tools/custom-tool/" btnText="Open Tool" >}}
+  {{< m3dp-cta type="email" location="homepage" >}}
+  {{< m3dp-cta type="support" >}}
+  {{< m3dp-cta type="app" title="Custom Title" href="https://app.example.com" btnText="Launch App" >}}
+  
+  Parameters:
+  - type: youtube | calculator | email | support | app (required)
+  - location: tracking location identifier (default: "content")
+  - href: custom link URL (for calculator/app types)
+  - btnText: custom button text
+  - title: custom title text
+  - ctaType: override tracking type (default: same as type)
+*/}}
+
+{{ $type := .Get "type" | default "youtube" }}
+{{ $location := .Get "location" | default "content" }}
+{{ $customText := .Inner }}
+{{ $href := .Get "href" }}
+{{ $btnText := .Get "btnText" }}
+{{ $titleParam := .Get "title" }}
+{{ $ctaType := .Get "ctaType" | default $type }}
+
+{{ if eq $type "youtube" }}
+<div class="m3dp-cta m3dp-cta--youtube">
+  <h3 class="m3dp-cta__title">📺 Watch This Tutorial on YouTube</h3>
+  {{ if $customText }}
+    <p class="m3dp-cta__text">{{ $customText | markdownify }}</p>
+  {{ else }}
+    <p class="m3dp-cta__text">Subscribe to Minimal 3DP for more 3D printing tutorials, reviews, and tips!</p>
+  {{ end }}
+  <a class="m3dp-cta__btn" 
+     href="https://www.youtube.com/channel/{{ .Site.Params.youtube_channel_id }}?sub_confirmation=1" 
+     target="_blank"
+     rel="noopener"
+     onclick="trackCtaClick('youtube','{{ $location }}')">
+    ▶️ Subscribe Now - {{ .Site.Params.youtube_subscribers | default "5,000+" }} subscribers
+  </a>
+</div>
+
+{{ else if eq $type "calculator" }}
+<div class="m3dp-cta m3dp-cta--calculator">
+  <h3 class="m3dp-cta__title">{{ if $titleParam }}{{ $titleParam }}{{ else }}🧮 Try Our Free Calculator{{ end }}</h3>
+  {{ if $customText }}
+    <p class="m3dp-cta__text">{{ $customText | markdownify }}</p>
+  {{ else }}
+    <p class="m3dp-cta__text">Calculate your 3D print costs accurately with our professional FDM cost calculator.</p>
+  {{ end }}
+  <a class="m3dp-cta__btn" 
+     href="{{ if $href }}{{ $href }}{{ else }}/tools/m3dp-fdm-cost-calculator/{{ end }}" 
+     onclick="trackCtaClick('{{ $ctaType }}','{{ $location }}')">
+    {{ if $btnText }}{{ $btnText }}{{ else }}🎯 Open Calculator{{ end }}
+  </a>
+</div>
+
+{{ else if eq $type "email" }}
+<div class="m3dp-cta m3dp-cta--email">
+  <h3 class="m3dp-cta__title">📧 Get Free 3D Printing Tips</h3>
+  {{ if $customText }}
+    <p class="m3dp-cta__text">{{ $customText | markdownify }}</p>
+  {{ else }}
+    <p class="m3dp-cta__text">Join our newsletter for weekly tutorials, reviews, and exclusive deals!</p>
+  {{ end }}
+  <form class="m3dp-cta__form" action="YOUR_EMAIL_SERVICE_URL" method="post">
+    <input class="m3dp-cta__input" 
+           type="email" 
+           name="email" 
+           placeholder="Your email address" 
+           required>
+    <button class="m3dp-cta__submit" 
+            type="submit" 
+            onclick="trackCtaClick('email','{{ $location }}')">
+      Subscribe (It's Free!)
+    </button>
+  </form>
+  <p class="m3dp-cta__note">No spam. Unsubscribe anytime.</p>
+</div>
+
+{{ else if eq $type "support" }}
+<div class="m3dp-cta m3dp-cta--support">
+  <h3 class="m3dp-cta__title">💜 Support This Content</h3>
+  {{ if $customText }}
+    <p class="m3dp-cta__text">{{ $customText | markdownify }}</p>
+  {{ else }}
+    <p class="m3dp-cta__text">If you found this helpful, consider supporting us through affiliate purchases or YouTube!</p>
+  {{ end }}
+  <a class="m3dp-cta__btn" 
+     href="https://www.youtube.com/channel/{{ .Site.Params.youtube_channel_id }}?sub_confirmation=1" 
+     target="_blank"
+     rel="noopener"
+     onclick="trackCtaClick('support','{{ $location }}')">
+    ❤️ Subscribe & Support
+  </a>
+</div>
+
+{{ else if eq $type "app" }}
+<div class="m3dp-cta m3dp-cta--app">
+  <h3 class="m3dp-cta__title">{{ if $titleParam }}{{ $titleParam }}{{ else }}🚀 Open the App{{ end }}</h3>
+  {{ if $customText }}
+    <p class="m3dp-cta__text">{{ $customText | markdownify }}</p>
+  {{ end }}
+  <a class="m3dp-cta__btn" 
+     href="{{ $href }}"
+     {{ if strings.HasPrefix $href "http" }}target="_blank" rel="noopener"{{ end }}
+     onclick="trackCtaClick('{{ $ctaType }}','{{ $location }}')">
+    {{ if $btnText }}{{ $btnText }}{{ else }}Open App ↗{{ end }}
+  </a>
+</div>
+
+{{ end }}
