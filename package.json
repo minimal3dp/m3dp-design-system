@@ -1,0 +1,11 @@
+{
+  "name": "m3dp-design-system",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "sass assets/scss/main.scss static/css/m3dp.min.css --style=compressed"
+  },
+  "devDependencies": {
+    "sass": "^1.79.0"
+  }
+}
