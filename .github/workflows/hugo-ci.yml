@@ -1,0 +1,68 @@
+name: Validate Hugo integration (module mounts)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  hugo-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.152.2'
+          extended: true
+
+      - name: Create minimal Hugo site
+        run: |
+          mkdir -p /tmp/site
+          cd /tmp/site
+          hugo new site .
+          cat > hugo.toml <<'EOT'
+          baseURL = "https://example.com/"
+          title = "Test"
+          [module]
+            [module.hugoVersion]
+              extended = true
+              min = "0.110.0"
+            [[module.imports]]
+              path = "github.com/minimal3dp/m3dp-design-system"
+              disable = false
+              [[module.imports.mounts]]
+                source = "assets/scss"
+                target = "assets/scss/m3dp-design-system"
+              [[module.imports.mounts]]
+                source = "layouts"
+                target = "layouts"
+          EOT
+          mkdir -p assets/scss
+          cat > assets/scss/_styles_project.scss <<'EOC'
+          @import "m3dp-design-system/m3dp-design-system";
+          EOC
+          mkdir -p content
+          cat > content/_index.md <<'EOC'
+          ---
+          title: Test Page
+          ---
+          
+          {{< m3dp-badge type="calculator" href="/tools/" >}}🧮 Calculator{{< /m3dp-badge >}}
+          
+          {{< m3dp-cta type="youtube" >}}Subscribe!{{< /m3dp-cta >}}
+          EOC
+
+      - name: Build Hugo site
+        run: |
+          cd /tmp/site
+          hugo --gc --minify
+
+      - name: Verify outputs
+        run: |
+          test -f /tmp/site/public/index.html
+          grep -q "m3dp-badge" /tmp/site/public/index.html
+          grep -q "cta" /tmp/site/public/index.html
