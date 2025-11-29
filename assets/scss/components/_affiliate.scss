@@ -1,0 +1,88 @@
+/* ==========================================================================
+   AFFILIATE COMPONENT
+   Amazon product card styles for affiliate marketing
+   ========================================================================== */
+
+/* Affiliate product card (used by amazon-product shortcode) */
+.affiliate-product-card {
+  border: 2px solid $m3dp-blue-600;
+  border-radius: $m3dp-radius-md;
+  padding: $m3dp-space-5;
+  margin: $m3dp-space-5 0;
+  display: flex;
+  gap: $m3dp-space-5;
+  flex-wrap: wrap;
+  
+  .product-image {
+    flex: 0 0 150px;
+    
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: $m3dp-radius-xs;
+      display: block;
+    }
+  }
+  
+  .product-info {
+    flex: 1;
+    min-width: 250px;
+    
+    h3 {
+      margin-top: 0;
+      color: $m3dp-gray-900;
+    }
+    
+    .price {
+      font-size: $m3dp-font-size-2xl;
+      font-weight: 700;
+      color: $m3dp-blue-600;
+      margin: $m3dp-space-2 0;
+    }
+  }
+  
+  .product-description {
+    margin: $m3dp-space-4 0;
+  }
+}
+
+/* Amazon CTA button */
+.btn.btn-amazon {
+  display: inline-block;
+  background: #FF9900;
+  color: #000;
+  padding: $m3dp-space-3 $m3dp-space-6;
+  text-decoration: none;
+  border-radius: $m3dp-radius-xs;
+  font-weight: 700;
+  margin-top: $m3dp-space-2;
+  
+  &:hover {
+    background: #F08800;
+    text-decoration: none;
+    color: #000;
+  }
+}
+
+/* Affiliate disclosure text */
+.affiliate-disclosure {
+  font-size: $m3dp-font-size-sm;
+  color: $m3dp-gray-600;
+  margin-top: $m3dp-space-2;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .affiliate-product-card {
+    flex-direction: column;
+    
+    .product-info {
+      min-width: 0;
+    }
+    
+    .product-image {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+  }
+}
