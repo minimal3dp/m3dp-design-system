@@ -1,12 +1,14 @@
 # Components Gallery
 
-Below are component-specific examples with references. Screenshots can be added later in `docs/images/`.
+Below are component-specific examples with references. Screenshots are stored in `docs/images/`.
 
 ## Badges
 ```hugo
 {{< m3dp-badge type="calculator" href="/tools/m3dp-fdm-cost-calculator/" >}}🧮 Try Calculator{{< /m3dp-badge >}}
 {{< m3dp-badge type="app" href="https://settings.minimal3dp.com/" >}}🧠 OrcaSlicer Assistant{{< /m3dp-badge >}}
 ```
+
+Screenshot: `docs/images/badges.png`
 
 ## Buttons
 ```html
@@ -15,11 +17,15 @@ Below are component-specific examples with references. Screenshots can be added 
 <a class="m3dp-btn m3dp-btn--amazon">Amazon</a>
 ```
 
+Screenshot: `docs/images/buttons.png`
+
 ## CTAs
 ```hugo
 {{< m3dp-cta type="youtube" >}}Subscribe for more tutorials!{{< /m3dp-cta >}}
 {{< m3dp-cta type="email" >}}Join the newsletter for weekly tips!{{< /m3dp-cta >}}
 ```
+
+Screenshot: `docs/images/ctas.png`
 
 ## Cards
 ```html
@@ -28,6 +34,8 @@ Below are component-specific examples with references. Screenshots can be added 
   <p>Card description text.</p>
 </div>
 ```
+
+Screenshot: `docs/images/cards.png`
 
 ## Affiliate Cards
 ```html
@@ -42,3 +50,5 @@ Below are component-specific examples with references. Screenshots can be added 
 <a href="#" class="btn btn-amazon">Buy on Amazon</a>
 <p class="affiliate-disclosure">As an Amazon Associate, we earn from qualifying purchases.</p>
 ```
+
+Screenshot: `docs/images/affiliate.png`

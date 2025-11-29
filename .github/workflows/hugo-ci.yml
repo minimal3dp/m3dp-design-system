@@ -66,3 +66,11 @@ jobs:
           test -f /tmp/site/public/index.html
           grep -q "m3dp-badge" /tmp/site/public/index.html
           grep -q "cta" /tmp/site/public/index.html
+      - name: Compile SCSS and verify CSS classes
+        run: |
+          npm install --no-audit --no-fund sass
+          npx sass node_modules/github.com/minimal3dp/m3dp-design-system/assets/scss/m3dp-design-system.scss /tmp/out.css || npx sass $(go env GOPATH)/pkg/mod/github.com/minimal3dp/m3dp-design-system@*/assets/scss/m3dp-design-system.scss /tmp/out.css || true
+          grep -q ".m3dp-badge" /tmp/out.css
+          grep -q ".m3dp-btn" /tmp/out.css
+          grep -q ".cta" /tmp/out.css
+          grep -q ".affiliate-product-card" /tmp/out.css
