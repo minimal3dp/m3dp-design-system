@@ -9,9 +9,12 @@ on:
       changelog:
         description: 'Changelog summary'
         required: true
+  release:
+    types: [published]
 
 jobs:
   tag-and-release:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,3 +37,43 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  append-to-changelog:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract release info
+        id: rel
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const rel = context.payload.release || {};
+            const tag = rel.tag_name || '';
+            const name = rel.name || tag;
+            const body = rel.body || '';
+            const date = (rel.published_at || new Date().toISOString()).slice(0,10);
+            core.setOutput('tag', tag);
+            core.setOutput('name', name);
+            core.setOutput('body', body);
+            core.setOutput('date', date);
+
+      - name: Append to CHANGELOG.md
+        run: |
+          NAME="${{ steps.rel.outputs.name }}"
+          DATE="${{ steps.rel.outputs.date }}"
+          BODY="${{ steps.rel.outputs.body }}"
+          printf "\n## [%s] - %s\n" "$NAME" "$DATE" >> CHANGELOG.md
+          printf "%s\n" "$BODY" >> CHANGELOG.md
+
+      - name: Commit changelog update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "chore: append ${{ steps.rel.outputs.tag }} notes to CHANGELOG.md" || echo "No changes to commit"
+          git push
