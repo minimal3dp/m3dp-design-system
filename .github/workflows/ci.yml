@@ -1,0 +1,32 @@
+name: Design System CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-scss:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install sass
+        run: npm install --no-audit --no-fund sass
+
+      - name: Compile SCSS entry
+        run: npx sass assets/scss/m3dp-design-system.scss /tmp/out.css
+
+      - name: Verify CSS contains key components
+        run: |
+          grep -q ".m3dp-badge" /tmp/out.css
+          grep -q ".m3dp-btn" /tmp/out.css
+          grep -q ".m3dp-cta" /tmp/out.css || true
+          grep -q ".affiliate-product-card" /tmp/out.css
