@@ -209,3 +209,61 @@
     }
   }
 }
+
+// =============================================================================
+// Backwards Compatibility Aliases
+// =============================================================================
+
+// Alias .cta to .m3dp-cta for backwards compatibility
+.cta {
+  @extend .m3dp-cta;
+}
+
+.cta--youtube {
+  @extend .m3dp-cta--youtube;
+}
+
+.cta--calculator {
+  @extend .m3dp-cta--calculator;
+}
+
+.cta--email {
+  @extend .m3dp-cta--email;
+}
+
+.cta--support {
+  @extend .m3dp-cta--support;
+}
+
+.cta--app {
+  @extend .m3dp-cta--app;
+}
+
+// Element aliases
+.cta__title {
+  @extend .m3dp-cta__title;
+}
+
+.cta__text {
+  @extend .m3dp-cta__text;
+}
+
+.cta__btn {
+  @extend .m3dp-cta__btn;
+}
+
+.cta__form {
+  @extend .m3dp-cta__form;
+}
+
+.cta__input {
+  @extend .m3dp-cta__input;
+}
+
+.cta__submit {
+  @extend .m3dp-cta__submit;
+}
+
+.cta__note {
+  @extend .m3dp-cta__note;
+}
